@@ -19,23 +19,50 @@ Book.prototype.readMessage = function() {
     return message;
 }
 
-// const thinkAndGrow = new Book('Think And Grow Rich', 'Napolean Hill', 290, true);
-// const sevenHabits = new Book('The 7 Habits of Highly Effective People', 'Stephen R. Covey', 340, false);
-// myLibrary.push(thinkAndGrow, sevenHabits);
+const thinkAndGrow = new Book('Think And Grow Rich', 'Napolean Hill', 290, true);
+const sevenHabits = new Book('The 7 Habits of Highly Effective People', 'Stephen R. Covey', 340, false);
+myLibrary.push(thinkAndGrow, sevenHabits);
 
 const refreshLib = (library) => {
     let bookCard = document.createElement("div");
+    let readButton = document.createElement('button');
+        library.forEach((book) => {
+            if(book.read) {
+                readButton.innerHTML = 'Read'
+                readButton.setAttribute('class', "btn btn-outline-success");
+            } else {
+                readButton.innerHTML = 'Not Read'
+                readButton.setAttribute('class', "btn btn-outline-warning");
+            }
+        });
+        readButton.onclick = () => {
+            toggleRead(library, readButton)
+        }
+
+    let removeBtn = document.createElement('button');
+        removeBtn.setAttribute('class', "btn btn-danger")
+        removeBtn.innerHTML = 'Remove'
+        removeBtn.onclick = () => {
+            console.log('hi')
+        }
 
     library.forEach(book => {
         bookCard.innerHTML = `
-            <div>${book.title}</div>
-            <div>${book.author}</div>
-            <div>${book.pages} Pages</div>
-            <div>${book.readMessage()}</div>
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">${book.title}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">${book.author}</h6>
+                    <p class="card-text">${book.pages}Pages</p>
+                </div>
+            </div>
         `
     });
+
+    bookCard.appendChild(readButton)
+    bookCard.appendChild(removeBtn)
     libDis.appendChild(bookCard);
 };
+
 const toggleHide = () => {
     newBookForm.classList.toggle('hide');
     newBookBtn.classList.toggle('hide');
@@ -74,6 +101,16 @@ form.addEventListener('submit', (e) => {
     addToLibrary(new Book(title, author, pages, read));
 })
 
+const toggleRead = (library, button) => {
+    if(button.innerHTML !== 'Read') {
+        button.innerHTML = 'Read'
+        button.setAttribute('class', "btn btn-outline-success")
+    } else {
+        button.innerHTML = 'Not Read'
+        button.setAttribute('class', "btn btn-outline-warning")
+    }
+};
+
 const addToLibrary = (newBook) => {
     if (myLibrary.some((book) => book.title === newBook.title)) return;
     myLibrary.push(newBook)
@@ -81,7 +118,7 @@ const addToLibrary = (newBook) => {
     refreshLib(myLibrary)
     form.reset()
     toggleHide()
-}
+};
 
 window.onload = () => {
     newBookForm.classList.add('hide');
