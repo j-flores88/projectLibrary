@@ -25,6 +25,8 @@ myLibrary.push(thinkAndGrow, sevenHabits);
 
 const refreshLib = (library) => {
     let bookCard = document.createElement("div");
+    let currentBook
+
     let readButton = document.createElement('button');
         library.forEach((book) => {
             if(book.read) {
@@ -42,13 +44,15 @@ const refreshLib = (library) => {
     let removeBtn = document.createElement('button');
         removeBtn.setAttribute('class', "btn btn-danger")
         removeBtn.innerHTML = 'Remove'
-        removeBtn.onclick = () => {
-            console.log('hi')
+        removeBtn.onclick = (e) => {
+            libDis.removeChild(bookCard)
+            removeFromLib(currentBook)
         }
 
     library.forEach(book => {
+        currentBook = book.title
         bookCard.innerHTML = `
-            <div class="card" style="width: 18rem;">
+            <div id="${book.title}" class="card" style="width: 18rem;">
                 <div class="card-body">
                     <h5 class="card-title">${book.title}</h5>
                     <h6 class="card-subtitle mb-2 text-muted">${book.author}</h6>
@@ -56,10 +60,9 @@ const refreshLib = (library) => {
                 </div>
             </div>
         `
+        bookCard.appendChild(readButton)
+        bookCard.appendChild(removeBtn)
     });
-
-    bookCard.appendChild(readButton)
-    bookCard.appendChild(removeBtn)
     libDis.appendChild(bookCard);
 };
 
@@ -126,6 +129,10 @@ const addToLibrary = (newBook) => {
     form.reset()
     toggleHide()
 };
+
+const removeFromLib = (bookTitle) => {
+    myLibrary = myLibrary.filter(books => books.title !== bookTitle);
+}
 
 window.onload = () => {
     newBookForm.classList.add('hide');
