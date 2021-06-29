@@ -18,13 +18,9 @@ Book.prototype.readMessage = function() {
     return message;
 }
 
-const thinkAndGrow = new Book('Think And Grow Rich', 'Napolean Hill', 290, true);
-const sevenHabits = new Book('The 7 Habits of Highly Effective People', 'Stephen R. Covey', 340, false);
-myLibrary.push(thinkAndGrow, sevenHabits);
-
 const refreshLib = (library) => {
     let bookCard = document.createElement("div");
-    let currentBook
+    let currentBook;
 
     let readButton = document.createElement('button');
         library.forEach((book) => {
