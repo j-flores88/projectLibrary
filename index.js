@@ -1,4 +1,4 @@
-let myLybrary = [];
+let myLibrary = [];
 
 function Book(title, author, pages, read){
     this.title = title,
@@ -7,8 +7,7 @@ function Book(title, author, pages, read){
     this.read = read
 };
 
-Book.prototype.info = function() {
-    let read;
-    (!read) ? read = 'have not read' : read = 'have read';
-    return `${this.title}, by ${this.author}, ${this.pages} long, ${read}.`
-};
+const thinkAndGrow = new Book('Think And Grow Rich', 'Napolean Hill', 700, true);
+myLibrary.push(thinkAndGrow);
+const sevenHabits = new Book('The 7 Habits of Highly Effective People', 'Stephen R. Covey', 340, false);
+myLibrary.push(sevenHabits);
