@@ -20,26 +20,23 @@ Book.prototype.readMessage = function() {
     return message;
 }
 
-const thinkAndGrow = new Book('Think And Grow Rich', 'Napolean Hill', 290, true);
-myLibrary.push(thinkAndGrow);
-const sevenHabits = new Book('The 7 Habits of Highly Effective People', 'Stephen R. Covey', 340, false);
-myLibrary.push(sevenHabits);
+// const thinkAndGrow = new Book('Think And Grow Rich', 'Napolean Hill', 290, true);
+// const sevenHabits = new Book('The 7 Habits of Highly Effective People', 'Stephen R. Covey', 340, false);
+// myLibrary.push(thinkAndGrow, sevenHabits);
 
-myLibrary.forEach(book => {
-    //on submit, clear all old data? or check if it alread exist
+const refreshLib = (library) => {
     let bookCard = document.createElement("div");
-    bookCard.innerHTML = `
-        <div>${book.title}</div>
-        <div>${book.author}</div>
-        <div>${book.pages} Pages</div>
-        <div>${book.readMessage()}</div>
-    `
-    libDis.appendChild(bookCard);
-});
 
-// window.onload = () => {
-//     newBookForm.classList.add('hide')
-// };
+    library.forEach(book => {
+        bookCard.innerHTML = `
+            <div>${book.title}</div>
+            <div>${book.author}</div>
+            <div>${book.pages} Pages</div>
+            <div>${book.readMessage()}</div>
+        `
+        libDis.appendChild(bookCard);
+    });
+};
 
 newBookBtn.onclick = () => {
     newBookForm.classList.remove('hide');
@@ -48,16 +45,40 @@ newBookBtn.onclick = () => {
 
 form.addEventListener('submit', (e) => {
     e.preventDefault(e);
+    let title, author, pages, read;
 
     const formInputs = document.querySelectorAll('input');
-    const radios = document.getElementsByName('read')
+    const radios = document.getElementsByName('read');
 
     formInputs.forEach(input => {
-        if(input.type === 'text') console.log(input.value)
+        if(input.type === 'text') {
+            switch (input.id) {
+                case 'title':
+                    title = input.value.trim();
+                    break;
+                case 'author':
+                    author = input.value.trim();
+                    break;
+            }
+        }
+        if(input.type === 'number') pages = Number(input.value)
     })
 
     radios.forEach(radio => {
-        if(radio.checked) console.log(radio.value)
+        if(radio.checked) {
+            (radio.value === '1') ? read = true : read = false;
+        }
     })
-
+    addToLibrary(new Book(title, author, pages, read));
 })
+
+const addToLibrary = (newBook) => {
+    if (myLibrary.some((book) => book.title === newBook.title)) return;
+    myLibrary.push(newBook)
+    refreshLib(myLibrary)
+}
+
+window.onload = () => {
+    newBookForm.classList.add('hide');
+    refreshLib(myLibrary);
+};
