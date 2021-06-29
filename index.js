@@ -1,4 +1,9 @@
-const libDis = document.getElementById('libraryDisplay')
+const libDis = document.getElementById('libraryDisplay');
+const newBookForm = document.getElementById('newBookForm');
+const newBookBtn = document.getElementById('newBookButton');
+const submitBtn = document.getElementById('submitBtn');
+const form = document.querySelector('.form');
+
 
 let myLibrary = [];
 
@@ -26,8 +31,33 @@ myLibrary.forEach(book => {
     bookCard.innerHTML = `
         <div>${book.title}</div>
         <div>${book.author}</div>
-        <div>${book.pages}</div>
+        <div>${book.pages} Pages</div>
         <div>${book.readMessage()}</div>
     `
     libDis.appendChild(bookCard);
+});
+
+// window.onload = () => {
+//     newBookForm.classList.add('hide')
+// };
+
+newBookBtn.onclick = () => {
+    newBookForm.classList.remove('hide');
+    newBookBtn.classList.add('hide');
+};
+
+form.addEventListener('submit', (e) => {
+    e.preventDefault(e);
+
+    const formInputs = document.querySelectorAll('input');
+    const radios = document.getElementsByName('read')
+
+    formInputs.forEach(input => {
+        if(input.type === 'text') console.log(input.value)
+    })
+
+    radios.forEach(radio => {
+        if(radio.checked) console.log(radio.value)
+    })
+
 })

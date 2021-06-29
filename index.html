@@ -3,7 +3,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="style.css"></script>
+    <link rel="stylesheet" href="style.css">
     <script src="index.js" defer></script>
     <title>Project Library</title>
 </head>
@@ -12,18 +12,20 @@
     <div id="addBook">
         <button id="newBookButton">Add New Book</button>
     </div>
-    <form>
-        <div id="newBookForm">
-            <input type="text" data-="title" placeholder="Book Title">
-            <input type="text" data-="author" placeholder="Book Author">
-            <input type="text" data-="pages" placeholder="Total Pages">
+    <div id="newBookForm">
+        <form class="form">
+            <label for="title"></label>
+            <input type="text" name="title" id="title" placeholder="Book Title" required/>
+            <label for="author"></label>
+            <input type="text" name="author" id="author" placeholder="Book Author" required/>
+            <label for="pages"></label>
+            <input type="text" name="pages" id="pages" placeholder="Book Pages" required/>
             <p>Have You read this book?</p>
-            <input type="radio" name="haveRead" id="yes" value="yes">
-            <label for="yes">Yes</label>
-            <input type="radio" name="haveRead" id="no" value="no">
-            <label for="no">No</abel>
-            <button id="submit">Submit</button>
-        </div>
-    </form>
+            <label for="haveRead"></label>
+            <input type="radio" name="read" value="1" required>Yes</input>
+            <input type="radio" name="read" value="0" required>No</input>
+            <button type="submit" id="submitBtn">Submit</button>
+        </form>
+    </div>
 </body>
 </html>
