@@ -8,6 +8,22 @@
     <title>Project Library</title>
 </head>
 <body>
-    
+    <div id="libraryDisplay"></div>
+    <div id="addBook">
+        <button id="newBookButton">Add New Book</button>
+    </div>
+    <form>
+        <div id="newBookForm">
+            <input type="text" data-="title" placeholder="Book Title">
+            <input type="text" data-="author" placeholder="Book Author">
+            <input type="text" data-="pages" placeholder="Total Pages">
+            <p>Have You read this book?</p>
+            <input type="radio" name="haveRead" id="yes" value="yes">
+            <label for="yes">Yes</label>
+            <input type="radio" name="haveRead" id="no" value="no">
+            <label for="no">No</abel>
+            <button id="submit">Submit</button>
+        </div>
+    </form>
 </body>
 </html>
