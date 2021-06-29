@@ -1,9 +1,8 @@
 const libDis = document.getElementById('libraryDisplay');
-const newBookForm = document.getElementById('newBookForm');
 const newBookBtn = document.getElementById('newBookButton');
 const submitBtn = document.getElementById('submitBtn');
+const newBookForm = document.getElementById('newBookForm');
 const form = document.querySelector('.form');
-
 
 let myLibrary = [];
 
@@ -34,13 +33,16 @@ const refreshLib = (library) => {
             <div>${book.pages} Pages</div>
             <div>${book.readMessage()}</div>
         `
-        libDis.appendChild(bookCard);
     });
+    libDis.appendChild(bookCard);
 };
+const toggleHide = () => {
+    newBookForm.classList.toggle('hide');
+    newBookBtn.classList.toggle('hide');
+}
 
 newBookBtn.onclick = () => {
-    newBookForm.classList.remove('hide');
-    newBookBtn.classList.add('hide');
+    toggleHide()
 };
 
 form.addEventListener('submit', (e) => {
@@ -75,7 +77,10 @@ form.addEventListener('submit', (e) => {
 const addToLibrary = (newBook) => {
     if (myLibrary.some((book) => book.title === newBook.title)) return;
     myLibrary.push(newBook)
+
     refreshLib(myLibrary)
+    form.reset()
+    toggleHide()
 }
 
 window.onload = () => {
