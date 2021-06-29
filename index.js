@@ -1,6 +1,5 @@
 const libDis = document.getElementById('libraryDisplay');
 const newBookBtn = document.getElementById('newBookButton');
-const submitBtn = document.getElementById('submitBtn');
 const newBookForm = document.getElementById('newBookForm');
 const form = document.querySelector('.form');
 
@@ -42,7 +41,7 @@ const refreshLib = (library) => {
         }
 
     let removeBtn = document.createElement('button');
-        removeBtn.setAttribute('class', "btn btn-danger")
+        removeBtn.setAttribute('class', "btn btn-danger buttonCSS")
         removeBtn.innerHTML = 'Remove'
         removeBtn.onclick = (e) => {
             libDis.removeChild(bookCard)
@@ -50,13 +49,14 @@ const refreshLib = (library) => {
         }
 
     library.forEach(book => {
-        currentBook = book.title
+        currentBook = book.title;
+        bookCard.setAttribute('class', '.col-lg-6 .col-sm-3 bookCardCSS')
         bookCard.innerHTML = `
             <div id="${book.title}" class="card" style="width: 18rem;">
                 <div class="card-body">
                     <h5 class="card-title">${book.title}</h5>
                     <h6 class="card-subtitle mb-2 text-muted">${book.author}</h6>
-                    <p class="card-text">${book.pages}Pages</p>
+                    <p class="card-text">${book.pages} Pages</p>
                 </div>
             </div>
         `
@@ -68,7 +68,7 @@ const refreshLib = (library) => {
 
 const toggleHide = () => {
     newBookForm.classList.toggle('hide');
-    newBookBtn.classList.toggle('hide');
+    newBookForm.classList.toggle('bookCardCSS')
 }
 
 newBookBtn.onclick = () => {

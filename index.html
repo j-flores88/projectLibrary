@@ -11,9 +11,15 @@
     <title>Project Library</title>
 </head>
 <body>
-    <div id="libraryDisplay">
-        <div id="bookCard"></div>
-    </div>
+    <ul class="nav justify-content-center">
+        <li class="nav-item">
+          <a class="nav-link dis" aria-current="page" >Project</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Library</a>
+        </li>
+      </ul>
+
     <div id="addBook">
         <button id="newBookButton" class="btn btn-outline-primary">Add New Book</button>
     </div>
@@ -29,8 +35,12 @@
             <label for="haveRead"></label>
             <input type="radio" name="read" value="1" required>Yes</input>
             <input type="radio" name="read" value="0" required>No</input>
-            <button type="submit" id="submitBtn">Submit</button>
+            <button type="submit" id="submitBtn" class="btn btn-outline-primary">Submit</button>
         </form>
+    </div>
+
+    <div class="container">
+        <div id="libraryDisplay" class="row"></div>
     </div>
 </body>
 </html>
