@@ -102,6 +102,13 @@ form.addEventListener('submit', (e) => {
 })
 
 const toggleRead = (library, button) => {
+    library.forEach(book => {
+        if(book.read) {
+            book.read = false;
+        } else {
+            book.read = true;
+        }
+    })
     if(button.innerHTML !== 'Read') {
         button.innerHTML = 'Read'
         button.setAttribute('class', "btn btn-outline-success")
